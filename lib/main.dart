@@ -12,7 +12,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Consumo de API',
       home: Scaffold(
-        
         body: MyHomePage(),
         backgroundColor: Color.fromARGB(255, 2, 50, 71),
       ),
@@ -55,6 +54,10 @@ class _MyHomePageState extends State<MyHomePage> {
     } catch (e) {
       print('Caught error: $e');
     }
+  }
+
+  void navigateToAboutPage(BuildContext context) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => AboutPage()));
   }
 
   @override
@@ -109,7 +112,39 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(
+              onPressed: () => navigateToAboutPage(context),
+              child: Text('Acerca de'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.grey,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(18.0),
+                ),
+                elevation: 4,
+                padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+              ),
+            ),
+          ),
         ],
+      ),
+    );
+  }
+}
+
+class AboutPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Acerca de'),
+      ),
+      body: Center(
+        child: Text(
+          'Colaboradores:\n- Estuardo Ramos 201830358 1\n- Jose Pu 201731370 2\n- Randy Sum 201230463 3 \n- Jhony Fuentes 201230463 4',
+          textAlign: TextAlign.center,
+        ),
       ),
     );
   }
