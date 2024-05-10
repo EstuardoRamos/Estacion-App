@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:practicas/datos.dart';
@@ -88,11 +89,11 @@ Widget build(BuildContext context) {
                 ],
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 30),
             buildButton(context, 'CUNOC', Color.fromARGB(255, 18, 30, 35)!, 1),
-            buildButton(context, 'Cantel', Colors.lightGreen[300]!, 2),
-            buildButton(context, 'C. Chiquirichapa', Colors.orange[300]!, 3),
-            buildButton(context, 'Acerca de', Colors.grey[350]!, null),
+            buildButton(context, 'Cantel',  Color.fromARGB(255, 18, 30, 35)!, 2),
+            buildButton(context, 'C. Chiquirichapa', Color.fromARGB(255, 18, 30, 35)!, 3),
+            buildButton(context, 'Acerca de',  Color.fromARGB(255, 18, 30, 35)!, null),
           ],
         ),
       ),
@@ -104,8 +105,8 @@ Widget buildButton(BuildContext context, String text, Color bgColor, int? tipo) 
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: SizedBox(
-      width: 280,  // Define el ancho uniforme de todos los botones
-      height: 60,  // Define la altura uniforme de todos los botones
+      width: 290,  // Define el ancho uniforme de todos los botones
+      height: 70,  // Define la altura uniforme de todos los botones
       child: ElevatedButton(
         onPressed: tipo != null ? () => fetchData(tipo, context) : () => navigateToAboutPage(context),
         child: Text(text),
@@ -129,18 +130,27 @@ Widget buildButton(BuildContext context, String text, Color bgColor, int? tipo) 
 
 }
 
+
+
 class AboutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Acerca de'),
+        backgroundColor: Color.fromARGB(147, 31, 38, 100),
       ),
-      body: Center(
-        child: Text(
-          'Colaboradores:\n- Estuardo Ramos 201830358 1\n- Jose Pu 201731370 2\n- Randy Sum 201230463 3 \n- Jhony Fuentes 202031288 4',
+      body: Container(
+        color: Colors.grey[850],
+        child:Center(child: Text(
+          'Colaboradores:\n- Estuardo Ramos 201830358 \n- Jose Pu 201731370 \n- Randy Sum 201230463  \n- Jhony Fuentes 202031288 ',
           textAlign: TextAlign.center,
-        ),
+          style: TextStyle(
+            fontSize: 18.0,
+            fontWeight: FontWeight.normal,
+            color: Colors.white, // Cambiado a blanco para texto en modo oscuro
+          ),
+        ),)
       ),
     );
   }

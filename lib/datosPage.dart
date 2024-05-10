@@ -12,7 +12,7 @@ class DatosPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Detalles de los Datos'),
-        backgroundColor: Colors.deepPurple[800], // Modificado para modo oscuro
+        backgroundColor: Color.fromARGB(147, 31, 38, 100), // Modificado para modo oscuro
       ),
       body: Container(
         color: Colors.grey[850], // Fondo más oscuro para modo oscuro
@@ -38,7 +38,7 @@ class DatosPage extends StatelessWidget {
                   child: Text('Regresar'),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.deepPurple,
-                    textStyle: TextStyle(color: Colors.white),
+                    textStyle: TextStyle(color: Color.fromARGB(255, 50, 49, 49)),
                     padding: EdgeInsets.symmetric(horizontal: 32, vertical: 16),
                   ),
                 ),
