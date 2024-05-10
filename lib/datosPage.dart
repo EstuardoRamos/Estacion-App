@@ -52,7 +52,7 @@ class DatosPage extends StatelessWidget {
 
   List<Widget> buildListTiles() {
     return [
-      buildCard('Fecha', '${datos.fecha}', Icons.calendar_today, Colors.deepPurple),
+      buildCard('Fecha', '${(datos.fecha)}', Icons.calendar_today, Colors.deepPurple),
       buildCard('Temperatura', temperatura(datos.temperatura), Icons.thermostat_outlined, Colors.red),
       buildCard('Humedad', humedad(datos.humedad), Icons.water_drop, Colors.blue),
       buildCard('Radiación', radiacion(datos.radiacion), Icons.wb_sunny, Colors.yellow),
@@ -86,6 +86,7 @@ class DatosPage extends StatelessWidget {
     String temperatura(String dato) {
     String temp ="";
     double tem = double.parse(dato);
+    tem = double.parse(tem.toStringAsFixed(2));
     if(tem < 10){
       temp = "Frio, $tem °C";
     }else if(tem>=10 && tem < 20){
@@ -121,6 +122,7 @@ String humedad(String dato) {
 String radiacion(String dato) {
     String temp ="";
     double tem = double.parse(dato);
+    tem = double.parse(tem.toStringAsFixed(2));
     if(tem < 200){
       temp = "Baja, $tem W/m²";
     }else if(tem>=200 && tem < 400){
@@ -130,8 +132,15 @@ String radiacion(String dato) {
     }else if(tem>=800 && tem < 1000){
       temp = "Muy alta, $tem W/m²";
     }
-  
+    
   // Realizamos algún cálculo o ajuste
   return temp;  // Devolvemos el resultado
+}
+String numDecimal(String dato){
+   String temp ="";
+    double tem = double.parse(dato);
+    tem = double.parse(tem.toStringAsFixed(2));
+    temp="$tem ";
+    return temp;
 }
 }

@@ -77,6 +77,7 @@ Widget build(BuildContext context) {
           children: <Widget>[
             Text(
               "Estación Meteorológica",
+              textAlign: TextAlign.center, 
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 40,
@@ -101,7 +102,7 @@ Widget build(BuildContext context) {
   );
 }
 
-Widget buildButton(BuildContext context, String text, Color bgColor, int? tipo) {
+Widget buildButton(BuildContext context, String lugarName, Color bgColor, int? tipo) {
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: SizedBox(
@@ -109,7 +110,7 @@ Widget buildButton(BuildContext context, String text, Color bgColor, int? tipo) 
       height: 70,  // Define la altura uniforme de todos los botones
       child: ElevatedButton(
         onPressed: tipo != null ? () => fetchData(tipo, context) : () => navigateToAboutPage(context),
-        child: Text(text),
+        child: Text(lugarName),
         style: ElevatedButton.styleFrom(
           backgroundColor: bgColor,
           shape: RoundedRectangleBorder(
@@ -138,20 +139,39 @@ class AboutPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Acerca de'),
-        backgroundColor: Color.fromARGB(147, 31, 38, 100),
+        backgroundColor: Color.fromARGB(255, 63, 41, 119), // Fondo oscuro para el AppBar
       ),
       body: Container(
-        color: Colors.grey[850],
-        child:Center(child: Text(
-          'Colaboradores:\n- Estuardo Ramos 201830358 \n- Jose Pu 201731370 \n- Randy Sum 201230463  \n- Jhony Fuentes 202031288 ',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 18.0,
-            fontWeight: FontWeight.normal,
-            color: Colors.white, // Cambiado a blanco para texto en modo oscuro
+        padding: EdgeInsets.all(20), // Padding para dar espacio alrededor del texto
+        decoration: BoxDecoration(
+          color: Colors.grey[900], // Fondo oscuro para el cuerpo
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Colaboradores:',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(height: 20), // Espacio entre título y lista
+              Text(
+                '- Estuardo Ramos 201830358 \n- Jose Pu 201731370 \n- Randy Sum 201230463 \n- Jhony Fuentes 202031288 ',
+                style: TextStyle(
+                  color: Colors.white70,
+                  fontSize: 18,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
           ),
-        ),)
+        ),
       ),
     );
   }
+
 }
