@@ -36,7 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
         break;
       case 2:
         url = Uri.parse('https://cyt.cunoc.edu.gt/index.php/Ultimo-Registro/Cantel');
-        nombreLugar = "CANTEl";
+        nombreLugar = "CANTEL";
         break;
       case 3:
         url = Uri.parse('https://cyt.cunoc.edu.gt/index.php/Ultimo-Registro/Conce');
@@ -61,76 +61,72 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Center( // Centra los elementos en la pantalla
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text("Estación Metereológica",style: TextStyle(color: Colors.amber, fontSize: 40 ),),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ElevatedButton(
-              onPressed: () => fetchData(1, context),
-              child: Text('CUNOC'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Color.fromARGB(255, 55, 29, 122),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(18.0),
-                ),
-                elevation: 4,
-                padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ElevatedButton(
-              onPressed: () => fetchData(2, context),
-              child: Text('Cantel'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(18.0),
-                ),
-                elevation: 4,
-                padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ElevatedButton(
-              onPressed: () => fetchData(3, context),
-              child: Text('Concepción Chiquirichapa'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(18.0),
-                ),
-                elevation: 4,
-                padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ElevatedButton(
-              onPressed: () => navigateToAboutPage(context),
-              child: Text('Acerca de'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.grey,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(18.0),
-                ),
-                elevation: 4,
-                padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
-              ),
-            ),
-          ),
-        ],
+Widget build(BuildContext context) {
+  return Scaffold(
+    body: Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/space.jpg'), // Confirma que esta ruta sea correcta.
+          fit: BoxFit.cover,
+        ),
       ),
-    );
-  }
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              "Estación Meteorológica",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 40,
+                shadows: <Shadow>[
+                  Shadow(
+                    offset: Offset(2.0, 2.0),
+                    blurRadius: 3.0,
+                    color: Color.fromARGB(150, 0, 0, 0),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 20),
+            buildButton(context, 'CUNOC', Color.fromARGB(255, 18, 30, 35)!, 1),
+            buildButton(context, 'Cantel', Colors.lightGreen[300]!, 2),
+            buildButton(context, 'C. Chiquirichapa', Colors.orange[300]!, 3),
+            buildButton(context, 'Acerca de', Colors.grey[350]!, null),
+          ],
+        ),
+      ),
+    ),
+  );
+}
+
+Widget buildButton(BuildContext context, String text, Color bgColor, int? tipo) {
+  return Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: SizedBox(
+      width: 280,  // Define el ancho uniforme de todos los botones
+      height: 60,  // Define la altura uniforme de todos los botones
+      child: ElevatedButton(
+        onPressed: tipo != null ? () => fetchData(tipo, context) : () => navigateToAboutPage(context),
+        child: Text(text),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: bgColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.0),
+          ),
+          elevation: 4,
+          padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+          textStyle: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+        ),
+      ),
+    ),
+  );
+}
+
 }
 
 class AboutPage extends StatelessWidget {
@@ -142,7 +138,7 @@ class AboutPage extends StatelessWidget {
       ),
       body: Center(
         child: Text(
-          'Colaboradores:\n- Estuardo Ramos 201830358 1\n- Jose Pu 201731370 2\n- Randy Sum 201230463 3 \n- Jhony Fuentes 201230463 4',
+          'Colaboradores:\n- Estuardo Ramos 201830358 1\n- Jose Pu 201731370 2\n- Randy Sum 201230463 3 \n- Jhony Fuentes 202031288 4',
           textAlign: TextAlign.center,
         ),
       ),

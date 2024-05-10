@@ -5,121 +5,32 @@ class DatosPage extends StatelessWidget {
   final Datos datos;
   final String lugar;
 
-  DatosPage({required this.datos,  required this.lugar});
+  DatosPage({required this.datos, required this.lugar});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Detalles de los Datos'),
-        backgroundColor: Colors.deepPurple, // Cambia el color del AppBar
+        backgroundColor: Colors.deepPurple[800], // Modificado para modo oscuro
       ),
       body: Container(
-        
-        color: Colors.grey[200], // Color de fondo suave
-        child: Center( 
-          // Asegura que el contenido esté centrado
-          child: ListView( // Permite el desplazamiento
+        color: Colors.grey[850], // Fondo más oscuro para modo oscuro
+        child: Center(
+          child: ListView(
             padding: const EdgeInsets.all(8.0),
             children: <Widget>[
               Center(
-             child: Text(
+                child: Text(
                   lugar,
-                  style: TextStyle(fontSize: 30, fontStyle: FontStyle.normal,),
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontStyle: FontStyle.normal,
+                    color: Colors.white, // Texto en blanco para modo oscuro
+                  ),
                 ),
               ),
-              Card(
-                elevation: 4,
-                margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                child: ListTile(
-                  title: Text('Fecha'),
-                  subtitle: Text('${datos.fecha}'),
-                  leading: Icon(Icons.calendar_today, color: Colors.deepPurple),
-                ),
-              ),
-              Card(
-                elevation: 4,
-                margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                child: ListTile(
-                  title: Text('Temperatura'),
-                  subtitle: Text('${temperatura(datos.temperatura)} '),
-                  leading: Icon(Icons.thermostat_outlined, color: Colors.red),
-                ),
-              ),
-              Card(
-                elevation: 4,
-                margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                child: ListTile(
-                  title: Text('Humedad'),
-                  subtitle: Text('${humedad(datos.humedad)} '),
-                  leading: Icon(Icons.water_drop, color: Colors.blue),
-                ),
-              ),
-              Card(
-                elevation: 4,
-                margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                child: ListTile(
-                  title: Text('Radiación'),
-                  subtitle: Text('${radiacion(datos.radiacion)}'),
-                  leading: Icon(Icons.wb_sunny, color: Colors.yellow),
-                ),
-              ),
-              Card(
-                elevation: 4,
-                margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                child: ListTile(
-                  title: Text('Suelo 1'),
-                  subtitle: Text('${datos.suelo1}'),
-                  leading: Icon(Icons.terrain, color: Colors.green[700]),
-                ),
-              ),
-              Card(
-                elevation: 4,
-                margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                child: ListTile(
-                  title: Text('Suelo 2'),
-                  //if(true)
-                  
-                  subtitle: Text('${datos.suelo2}'),
-                  leading: Icon(Icons.terrain, color: Colors.green[800]),
-                ),
-              ),
-              Card(
-                elevation: 4,
-                margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                child: ListTile(
-                  title: Text('Suelo 3'),
-                  subtitle: Text('${datos.suelo3}'),
-                  leading: Icon(Icons.terrain, color: Colors.green[900]),
-                ),
-              ),
-              Card(
-                elevation: 4,
-                margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                child: ListTile(
-                  title: Text('Dirección del Viento'),
-                  subtitle: Text('${datos.direccion}°'),
-                  leading: Icon(Icons.explore, color: Colors.orange),
-                ),
-              ),
-              Card(
-                elevation: 4,
-                margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                child: ListTile(
-                  title: Text('Velocidad del Viento'),
-                  subtitle: Text('${datos.velocidad} m/s'),
-                  leading: Icon(Icons.air, color: Colors.purple),
-                ),
-              ),
-              Card(
-                elevation: 4,
-                margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                child: ListTile(
-                  title: Text('Precipitación'),
-                  subtitle: Text('${datos.precipitacion} mm'),
-                  leading: Icon(Icons.grain, color: Colors.blueGrey),
-                ),
-              ),
+              ...buildListTiles(),
               SizedBox(height: 20),
               Center(
                 child: ElevatedButton(
@@ -138,7 +49,41 @@ class DatosPage extends StatelessWidget {
       ),
     );
   }
-  String temperatura(String dato) {
+
+  List<Widget> buildListTiles() {
+    return [
+      buildCard('Fecha', '${datos.fecha}', Icons.calendar_today, Colors.deepPurple),
+      buildCard('Temperatura', temperatura(datos.temperatura), Icons.thermostat_outlined, Colors.red),
+      buildCard('Humedad', humedad(datos.humedad), Icons.water_drop, Colors.blue),
+      buildCard('Radiación', radiacion(datos.radiacion), Icons.wb_sunny, Colors.yellow),
+      buildCard('Suelo 1', '${datos.suelo1}', Icons.terrain, Colors.green[700]!),
+      buildCard('Suelo 2', '${datos.suelo2}', Icons.terrain, Colors.green[800]!),
+      buildCard('Suelo 3', '${datos.suelo3}', Icons.terrain, Colors.green[900]!),
+      buildCard('Dirección del Viento', '${datos.direccion}°', Icons.explore, Colors.orange),
+      buildCard('Velocidad del Viento', '${datos.velocidad} m/s', Icons.air, Colors.purple),
+      buildCard('Precipitación', '${datos.precipitacion} mm', Icons.grain, Colors.blueGrey),
+    ];
+  }
+
+  Card buildCard(String title, String subtitle, IconData icon, Color iconColor) {
+    return Card(
+      color: Colors.grey[800], // Cards oscuros para modo oscuro
+      elevation: 4,
+      margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: ListTile(
+        title: Text(
+          title,
+          style: TextStyle(color: Colors.white), // Texto en blanco para modo oscuro
+        ),
+        subtitle: Text(
+          subtitle,
+          style: TextStyle(color: Colors.white70), // Texto en blanco claro para modo oscuro
+        ),
+        leading: Icon(icon, color: iconColor),
+      ),
+    );
+  }
+    String temperatura(String dato) {
     String temp ="";
     double tem = double.parse(dato);
     if(tem < 10){
